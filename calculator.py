@@ -1,5 +1,6 @@
 import tkinter as tk
 import webbrowser
+from tkinter import messagebox
 
 
 class Rechner : 
@@ -9,18 +10,20 @@ class Rechner :
         self.Root.title("Rechner")
         self.Root.geometry("340x350")
         self.Root.resizable(width=False, height=False)
-        self.Root.config(bg="#A9A9A9")
+        self.Root.config(bg="#000000")
 
         BtnFont = "Arial 20 bold"
 
 
 
-    
-
-
-
         self.MyEntry = tk.Entry(self.Root,bd=10, width=20, font="Arial 22",bg="white")
         self.MyEntry.grid(row=0,column=0,columnspan=4)
+        
+
+        """  We'll use lambda here because command expects a function reference,
+             not the result of a function call. Without lambda for example, Click(7) would
+             be executed immediately when the button is created instead of when
+             the user clicks it. """
         
         self.Number7 = tk.Button(self.Root,text="7",font= BtnFont,bd=10,height=1,width=3,command=lambda: self.Click(7))
         self.Number7.grid(row=1,column=0)
@@ -65,10 +68,10 @@ class Rechner :
         self.Division = tk.Button(self.Root,text="÷",font= BtnFont,bd=10,height=1,width=3,bg="SeaGreen",command=lambda: self.Click("/"))
         self.Division.grid(row=4,column=3)
 
-        self.Delete = tk.Button(self.Root,text="C",font= BtnFont,bd=10,height=1,width=3,bg="Crimson")
+        self.Delete = tk.Button(self.Root,text="C",font= BtnFont,bd=10,height=1,width=3,bg="Crimson",command=self.Clear)
         self.Delete.grid(row=4,column=1)
 
-        self.Equal = tk.Button(self.Root,text="=",font= BtnFont,bd=10,height=1,width=3,bg="yellow")
+        self.Equal = tk.Button(self.Root,text="=",font= BtnFont,bd=10,height=1,width=3,bg="yellow",command=self.Equal)
         self.Equal.grid(row=4,column=2)
 
         self.Root.mainloop()
@@ -76,8 +79,24 @@ class Rechner :
 
     def Click(self,number) : 
         self.MyEntry.insert(tk.END,number)
-
+    
+    def Clear(self) : 
+        self.MyEntry.delete(0, tk.END)
+    
+    def Equal(self) :
+        try :
+             
+         Result = eval(self.MyEntry.get())
+         self.Clear()
+         self.MyEntry.insert(tk.END, Result)
+        
+        except : 
+            messagebox.showerror("Fehler !","Bitte überprüfen Sie Ihre Eingabe.")
+        
+       
+    
 
 Mein_Rechner = Rechner()
+
     
 
