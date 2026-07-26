@@ -84,14 +84,38 @@ class Rechner :
         self.MyEntry.delete(0, tk.END)
     
     def Equal(self) :
-        try :
-             
-         Result = eval(self.MyEntry.get())
-         self.Clear()
-         self.MyEntry.insert(tk.END, Result)
-        
-        except : 
-            messagebox.showerror("Fehler !","Bitte überprüfen Sie Ihre Eingabe.")
+
+            # Previous implementation using eval().
+            # Suitable for valid mathematical expressions with multiple operations.
+            # Replaced with custom operation handling for learning purposes.
+
+            # -------- Previous Code --------
+
+            # Result = eval(self.MyEntry.get())
+            # self.Clear()
+            # self.MyEntry.insert(tk.END, Result)
+         
+
+            screen = self.MyEntry.get()
+            if "+" in screen : 
+                l1 = screen.split("+")
+                result = sum(map(float,l1))
+                self.Clear()
+                self.MyEntry.insert(tk.END,str(result))
+
+            elif "-" in screen : 
+                l1 = screen.split("-")
+                l1 = list(map(float,l1))
+                result = l1[0] - l1[1]
+                if len(l1) > 2 : 
+                    i = 2 
+                    while i < len(l1) : 
+                        result = result - l1[i]
+                        i += 1
+                self.Clear()
+                self.MyEntry.insert(tk.END , str(result))
+                 
+
         
        
     
