@@ -98,22 +98,62 @@ class Rechner :
 
             screen = self.MyEntry.get()
             if "+" in screen : 
-                l1 = screen.split("+")
-                result = sum(map(float,l1))
+                Numbers = screen.split("+")
+
+                # map() applies the given function to each element and returns a map object.
+                # Here, map(float, Numbers) converts each string in Numbers to a float.
+                # sum() can iterate over a map object directly, so converting it to a list is unnecessary.
+                result = sum(map(float,Numbers)) 
+                
                 self.Clear()
                 self.MyEntry.insert(tk.END,str(result))
 
             elif "-" in screen : 
-                l1 = screen.split("-")
-                l1 = list(map(float,l1))
-                result = l1[0] - l1[1]
-                if len(l1) > 2 : 
-                    i = 2 
-                    while i < len(l1) : 
-                        result = result - l1[i]
-                        i += 1
+                numbers  = screen.split("-")
+
+                # Convert the map object to a list because subtraction is performed manually,
+                # unlike sum(), which can iterate over a map object directly.
+                numbers  = list(map(float,numbers))
+                
+                result = numbers [0]
+
+                for i in range(1,len(numbers)) :
+                      result =  result - numbers [i]
+                    
                 self.Clear()
                 self.MyEntry.insert(tk.END , str(result))
+
+            elif "*" in screen : 
+                 numbers = screen.split("*")
+                 numbers = list(map(float,numbers))
+
+                 result = 1 
+                 for i in range(len(numbers)) : 
+                      result = result * numbers[i]
+
+                 self.Clear()
+                 self.MyEntry.insert(tk.END,str(result))
+                 
+
+            elif "/" in screen : 
+                 numbers = screen.split("/")
+                 numbers = list(map(float,numbers))
+
+                 result = numbers[0]
+                 for i in range (1,len(numbers)) :
+
+                      if numbers[i] != 0 :  
+                       result = result / numbers[i]
+                       
+                      else : 
+                           self.Clear()
+                           messagebox.showwarning("Fehler","Eine Division durch Null ist nicht möglich.")
+                           return
+
+                 self.Clear()
+                 self.MyEntry.insert(tk.END,str(result))
+                           
+                 
                  
 
         
