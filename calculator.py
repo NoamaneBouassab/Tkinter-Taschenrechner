@@ -8,7 +8,7 @@ class Rechner :
     
         self.Root = tk.Tk()
         self.Root.title("Rechner")
-        self.Root.geometry("340x350")
+        self.Root.geometry("340x414")
         self.Root.resizable(width=False, height=False)
         self.Root.config(bg="#000000")
 
@@ -74,7 +74,15 @@ class Rechner :
         self.Equal = tk.Button(self.Root,text="=",font= BtnFont,bd=10,height=1,width=3,bg="yellow",command=self.Equal)
         self.Equal.grid(row=4,column=2)
 
+        self.Mein_Github = tk.Button(self.Root,text="Besuche mein GitHub", bd=5 ,width=20 ,height=2
+                                        ,bg="#24292e",fg="white",font=("Arial",15,"bold"),command=self.Open_Github)
+        self.Mein_Github.grid(row=5,column=0,columnspan=4,sticky="ew")
+      
+
         self.Root.mainloop()
+
+    def Open_Github(self) : 
+            webbrowser.open("https://github.com/NoamaneBouassab") 
 
 
     def Click(self,number) : 
@@ -152,6 +160,8 @@ class Rechner :
 
                  self.Clear()
                  self.MyEntry.insert(tk.END,str(result))
+
+
                            
                  
                  
